@@ -1,0 +1,11 @@
+export BIGDATA_BASE=/root/dev/projects/bigdata-auth-localhost
+
+export JAVA_HOME=/usr/lib/jvm/java
+export HADOOP_HOME=${BIGDATA_BASE}/hadoop
+export HADOOP_CONF_DIR=${BIGDATA_BASE}/hadoop/etc/hadoop
+export HIVE_HOME=${BIGDATA_BASE}/hive
+export SPARK_HOME=${BIGDATA_BASE}/spark
+export LIVY_HOME=${BIGDATA_BASE}/livy
+export HBASE_HOME=${BIGDATA_BASE}/hbase
+
+export PATH=${HADOOP_HOME}/bin:${HIVE_HOME}/bin:${SPARK_HOME}/bin:${LIVY_HOME}/bin:${HBASE_HOME}/bin:${PATH}

@@ -3,25 +3,34 @@ package test;
 public class TestResources {
 
     private String basePath = "/Users/gmliao/dev/frameworks/bigdata/test";
+    private String testResourcesBase = basePath + "/src/test/resources";
 
     String krb5FilePath() {
-        return basePath + "/src/test/resources/krb5.conf";
+        return testResourcesBase + "/krb5.conf";
     }
 
     String keytabFilePath() {
-        return basePath + "/src/test/resources/root.keytab";
+        return testResourcesBase + "/root.keytab";
     }
 
     String coreSiteFilePath() {
-        return basePath + "/src/test/resources/core-site.xml";
+        return testResourcesBase + "/core-site.xml";
     }
 
     String hdfsSiteFilePath() {
-        return basePath + "/src/test/resources/hdfs-site.xml";
+        return testResourcesBase + "/hdfs-site.xml";
     }
 
     String hbaseSiteFilePath() {
-        return basePath + "/src/test/resources/hbase-site.xml";
+        return testResourcesBase + "/hbase-site.xml";
+    }
+
+    String jaasConfPath() {
+        return testResourcesBase + "/jaas.conf";
+    }
+
+    String sparkPiJarFilePath() {
+        return testResourcesBase + "/spark-pi.jar";
     }
 
     public void configKerberos() {

@@ -23,7 +23,7 @@ public class LivyTest {
     public void should_submit_and_run_job_through_livy() throws IOException, URISyntaxException, InterruptedException, ExecutionException {
         testResources.configKerberos();
         LivyClient client = new LivyClientBuilder()
-                .setURI(new URI("http://localhost:8998"))
+                .setURI(new URI(testResources.livyUrl()))
                 .setConf("livy.client.http.spnego.enable", "true")
                 .setConf("livy.client.http.auth.login.config", testResources.jaasConfPath())
                 .setConf("livy.client.http.krb5.conf", testResources.krb5FilePath())

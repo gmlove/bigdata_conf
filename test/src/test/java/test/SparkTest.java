@@ -1,9 +1,5 @@
 package test;
 
-import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.FSDataInputStream;
-import org.apache.hadoop.fs.FileSystem;
-import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.security.UserGroupInformation;
 import org.apache.spark.sql.SparkSession;
 import org.junit.Test;
@@ -21,14 +17,14 @@ public class SparkTest {
                 org.apache.hadoop.conf.Configuration();
         conf.set("hadoop.security.authentication", "Kerberos");
         UserGroupInformation.setConfiguration(conf);
-        UserGroupInformation.loginUserFromKeytab("root@HADOOP.COM", testResources.keytabFilePath());
+        UserGroupInformation.loginUserFromKeytab(testResources.keytabUser(), testResources.keytabFilePath());
         SparkSession spark = SparkSession
                 .builder()
                 .appName("Simple Spark Example")
                 .master("local")
                 .enableHiveSupport()
-                .config("spark.sql.warehouse.dir", "hdfs://localhost:9000/user/hive/warehouse")
-                .config("hive.metastore.uris", "thrift://localhost:9083")
+                .config("spark.sql.warehouse.dir", testResources.sparkSqlWarehouseDir())
+                .config("hive.metastore.uris", testResources.hiveMetastoreUrl())
                 .getOrCreate();
 
         spark.sql("create database if not exists t");

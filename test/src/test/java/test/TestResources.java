@@ -1,36 +1,66 @@
 package test;
 
+import java.io.File;
+
 public class TestResources {
 
-    private String basePath = "/Users/gmliao/dev/frameworks/bigdata/test";
-    private String testResourcesBase = basePath + "/src/test/resources";
+    private String testResourcesBase;
+
+    public TestResources() {
+        String basePath = new File("").getAbsolutePath();
+        testResourcesBase = String.join(File.separator, basePath, "src", "test", "resources");
+    }
 
     String krb5FilePath() {
-        return testResourcesBase + "/krb5.conf";
+        return resourcePath("krb5.conf");
+    }
+
+    String keytabUser() {
+        return "root@HADOOP.COM";
     }
 
     String keytabFilePath() {
-        return testResourcesBase + "/root.keytab";
+        return resourcePath("root.keytab");
     }
 
     String coreSiteFilePath() {
-        return testResourcesBase + "/core-site.xml";
+        return resourcePath("core-site.xml");
     }
 
     String hdfsSiteFilePath() {
-        return testResourcesBase + "/hdfs-site.xml";
+        return resourcePath("hdfs-site.xml");
     }
 
     String hbaseSiteFilePath() {
-        return testResourcesBase + "/hbase-site.xml";
+        return resourcePath("hbase-site.xml");
     }
 
     String jaasConfPath() {
-        return testResourcesBase + "/jaas.conf";
+        return resourcePath("jaas.conf");
     }
 
     String sparkPiJarFilePath() {
-        return testResourcesBase + "/spark-pi.jar";
+        return resourcePath("spark-pi.jar");
+    }
+
+    String hiveUrl() {
+        return "jdbc:hive2://localhost:10000/default;principal=root/localhost@HADOOP.COM";
+    }
+
+    String sparkSqlWarehouseDir() {
+        return "hdfs://localhost:9000/user/hive/warehouse";
+    }
+
+    String hiveMetastoreUrl() {
+        return "thrift://localhost:9083";
+    }
+
+    String livyUrl() {
+        return "http://localhost:8998";
+    }
+
+    private String resourcePath(String fileName) {
+        return String.join(File.separator, testResourcesBase, fileName);
     }
 
     public void configKerberos() {

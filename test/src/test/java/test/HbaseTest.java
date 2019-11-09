@@ -30,7 +30,7 @@ public class HbaseTest {
         Configuration config = HBaseConfiguration.create();
         config.addResource(new Path(testResources.hbaseSiteFilePath()));
         UserGroupInformation.setConfiguration(config);
-        UserGroupInformation.loginUserFromKeytab("root@HADOOP.COM", testResources.keytabFilePath());
+        UserGroupInformation.loginUserFromKeytab(testResources.keytabUser(), testResources.keytabFilePath());
 
         TableName tableName = TableName.valueOf("test");
 
@@ -61,4 +61,5 @@ public class HbaseTest {
         assertEquals("value1", new String(table.get(g).getValue(family1.getBytes(), qualifier1.getBytes())));
         connection.close();
     }
+
 }

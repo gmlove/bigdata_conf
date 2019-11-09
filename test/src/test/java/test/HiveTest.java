@@ -23,9 +23,9 @@ public class HiveTest {
                 org.apache.hadoop.conf.Configuration();
         conf.set("hadoop.security.authentication", "Kerberos");
         UserGroupInformation.setConfiguration(conf);
-        UserGroupInformation.loginUserFromKeytab("root@HADOOP.COM", testResources.keytabFilePath());
+        UserGroupInformation.loginUserFromKeytab(testResources.keytabUser(), testResources.keytabFilePath());
 
-        String url = "jdbc:hive2://localhost:10000/default;principal=root/localhost@HADOOP.COM";
+        String url = testResources.hiveUrl();
         Connection conn = DriverManager.getConnection(url);
         Statement statement = conn.createStatement();
 
@@ -48,4 +48,5 @@ public class HiveTest {
 
         conn.close();
     }
+
 }

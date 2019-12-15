@@ -18,17 +18,17 @@ import java.io.IOException;
 
 public class HdfsTest {
 
-    TestResources testResources = new TestResources();
+    TestConfig testConfig = new TestConfig();
 
     @Test
-    public void should_read_files_from_hdfs() throws IOException {
-        testResources.configKerberos();
+    public void should_read_write_files_from_hdfs() throws IOException {
+        testConfig.configKerberos();
 
         Configuration conf = new Configuration();
-        conf.addResource(new Path(testResources.hdfsSiteFilePath()));
-        conf.addResource(new Path(testResources.coreSiteFilePath()));
+        conf.addResource(new Path(testConfig.hdfsSiteFilePath()));
+        conf.addResource(new Path(testConfig.coreSiteFilePath()));
         UserGroupInformation.setConfiguration(conf);
-        UserGroupInformation.loginUserFromKeytab("root@HADOOP.COM", testResources.keytabFilePath());
+        UserGroupInformation.loginUserFromKeytab(testConfig.keytabUser(), testConfig.keytabFilePath());
 
         FileSystem fileSystem = FileSystem.get(conf);
         Path path = new Path("/user/root/input/core-site.xml");
@@ -37,7 +37,7 @@ public class HdfsTest {
             assertTrue(deleteSuccess);
         }
 
-        String fileContent = FileUtils.readFileToString(new File(testResources.coreSiteFilePath()));
+        String fileContent = FileUtils.readFileToString(new File(testConfig.coreSiteFilePath()));
         try (FSDataOutputStream fileOut = fileSystem.create(path)) {
             fileOut.write(fileContent.getBytes("utf-8"));
         }

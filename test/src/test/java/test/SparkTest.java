@@ -8,23 +8,23 @@ import java.io.IOException;
 
 public class SparkTest {
 
-    TestResources testResources = new TestResources();
+    TestConfig testConfig = new TestConfig();
 
     @Test
     public void should_be_able_to_read_hive_from_spark() throws IOException {
-        testResources.configKerberos();
+        testConfig.configKerberos();
         org.apache.hadoop.conf.Configuration conf = new
                 org.apache.hadoop.conf.Configuration();
         conf.set("hadoop.security.authentication", "Kerberos");
         UserGroupInformation.setConfiguration(conf);
-        UserGroupInformation.loginUserFromKeytab(testResources.keytabUser(), testResources.keytabFilePath());
+        UserGroupInformation.loginUserFromKeytab(testConfig.keytabUser(), testConfig.keytabFilePath());
         SparkSession spark = SparkSession
                 .builder()
                 .appName("Simple Spark Example")
                 .master("local")
                 .enableHiveSupport()
-                .config("spark.sql.warehouse.dir", testResources.sparkSqlWarehouseDir())
-                .config("hive.metastore.uris", testResources.hiveMetastoreUrl())
+                .config("spark.sql.warehouse.dir", testConfig.sparkSqlWarehouseDir())
+                .config("hive.metastore.uris", testConfig.hiveMetastoreUrl())
                 .getOrCreate();
 
         spark.sql("create database if not exists t");

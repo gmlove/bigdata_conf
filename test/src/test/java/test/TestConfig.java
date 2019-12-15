@@ -2,13 +2,15 @@ package test;
 
 import java.io.File;
 
-public class TestResources {
+public class TestConfig {
 
-    private String testResourcesBase;
+    private String testConfigBase;
+    private String shdHost;
 
-    public TestResources() {
+    public TestConfig() {
         String basePath = new File("").getAbsolutePath();
-        testResourcesBase = String.join(File.separator, basePath, "src", "test", "resources");
+        testConfigBase = String.join(File.separator, basePath, "src", "test", "resources");
+        shdHost = System.getProperty("shdHost", "localhost");
     }
 
     String krb5FilePath() {
@@ -44,23 +46,23 @@ public class TestResources {
     }
 
     String hiveUrl() {
-        return "jdbc:hive2://localhost:10000/default;principal=root/localhost@HADOOP.COM";
+        return String.format("jdbc:hive2://%s:10000/default;principal=root/%s@HADOOP.COM", shdHost, shdHost);
     }
 
     String sparkSqlWarehouseDir() {
-        return "hdfs://localhost:9000/user/hive/warehouse";
+        return String.format("hdfs://%s:9000/user/hive/warehouse", shdHost);
     }
 
     String hiveMetastoreUrl() {
-        return "thrift://localhost:9083";
+        return String.format("thrift://%s:9083", shdHost);
     }
 
     String livyUrl() {
-        return "http://localhost:8998";
+        return String.format("http://%s:8998", shdHost);
     }
 
     private String resourcePath(String fileName) {
-        return String.join(File.separator, testResourcesBase, fileName);
+        return String.join(File.separator, testConfigBase, fileName);
     }
 
     public void configKerberos() {

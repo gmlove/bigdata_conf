@@ -17,21 +17,21 @@ import java.util.concurrent.ExecutionException;
 public class LivyTest {
     private static Logger log = LoggerFactory.getLogger(LivyTest.class);
 
-    TestResources testResources = new TestResources();
+    TestConfig testConfig = new TestConfig();
 
     @Test
     public void should_submit_and_run_job_through_livy() throws IOException, URISyntaxException, InterruptedException, ExecutionException {
-        testResources.configKerberos();
+        testConfig.configKerberos();
         LivyClient client = new LivyClientBuilder()
-                .setURI(new URI(testResources.livyUrl()))
+                .setURI(new URI(testConfig.livyUrl()))
                 .setConf("livy.client.http.spnego.enable", "true")
-                .setConf("livy.client.http.auth.login.config", testResources.jaasConfPath())
-                .setConf("livy.client.http.krb5.conf", testResources.krb5FilePath())
+                .setConf("livy.client.http.auth.login.config", testConfig.jaasConfPath())
+                .setConf("livy.client.http.krb5.conf", testConfig.krb5FilePath())
                 .setConf("livy.client.http.krb5.debug", "true")
                 .build();
 
         try {
-            String piJar = testResources.sparkPiJarFilePath();
+            String piJar = testConfig.sparkPiJarFilePath();
             log.info("Uploading {} to the Spark context...", piJar);
             client.uploadJar(new File(piJar)).get();
 

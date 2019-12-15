@@ -14,18 +14,18 @@ import java.sql.Statement;
 
 public class HiveTest {
 
-    TestResources testResources = new TestResources();
+    TestConfig testConfig = new TestConfig();
 
     @Test
     public void should_connect_to_hive_and_execute_query() throws IOException, SQLException {
-        testResources.configKerberos();
+        testConfig.configKerberos();
         org.apache.hadoop.conf.Configuration conf = new
                 org.apache.hadoop.conf.Configuration();
         conf.set("hadoop.security.authentication", "Kerberos");
         UserGroupInformation.setConfiguration(conf);
-        UserGroupInformation.loginUserFromKeytab(testResources.keytabUser(), testResources.keytabFilePath());
+        UserGroupInformation.loginUserFromKeytab(testConfig.keytabUser(), testConfig.keytabFilePath());
 
-        String url = testResources.hiveUrl();
+        String url = testConfig.hiveUrl();
         Connection conn = DriverManager.getConnection(url);
         Statement statement = conn.createStatement();
 

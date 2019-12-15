@@ -22,15 +22,15 @@ import java.io.IOException;
 
 public class HbaseTest {
 
-    TestResources testResources = new TestResources();
+    TestConfig testConfig = new TestConfig();
 
     @Test
     public void should_read_write_hbase() throws IOException {
-        testResources.configKerberos();
+        testConfig.configKerberos();
         Configuration config = HBaseConfiguration.create();
-        config.addResource(new Path(testResources.hbaseSiteFilePath()));
+        config.addResource(new Path(testConfig.hbaseSiteFilePath()));
         UserGroupInformation.setConfiguration(config);
-        UserGroupInformation.loginUserFromKeytab(testResources.keytabUser(), testResources.keytabFilePath());
+        UserGroupInformation.loginUserFromKeytab(testConfig.keytabUser(), testConfig.keytabFilePath());
 
         TableName tableName = TableName.valueOf("test");
 

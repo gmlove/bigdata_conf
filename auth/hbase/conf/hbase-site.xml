@@ -24,21 +24,8 @@
 
   <property>
     <name>hbase.rootdir</name>
-    <value>hdfs://hd01-7:9000/hbase</value>
+    <value>hdfs://shd:9000/hbase</value>
   </property>
-  <property>
-    <name>hbase.zookeeper.property.dataDir</name>
-    <value>/hd/data/hbase/zk_data</value>
-  </property>
-<!--  <property>
-    <name>hbase.master.dns.interface</name>
-    <value>hd01-7</value> --> <!-- to let ssh tunnel work: ssh -L localhost:16000:localhost:16000 root@rhd01-1 -->
-<!--  </property>
-  <property>
-    <name>hbase.regionserver.dns.interface</name>
-    <value>hd01-7</value> --> <!-- to let ssh tunnel work: ssh -L localhost:16020:localhost:16020 root@rhd01-1 -->
-<!--  </property>
--->
   <property>
     <name>hbase.unsafe.stream.capability.enforce</name>
     <value>false</value>
@@ -53,6 +40,56 @@
       HBase is complaining of an inability to use hsync or hflush it's most
       likely not a false positive.
     </description>
+  </property>
+
+
+<property>
+    <name>hbase.security.authentication</name>
+    <value>kerberos</value>
+</property>
+
+<property>
+  <name>hbase.regionserver.kerberos.principal</name>
+  <value>root/_HOST@HADOOP.COM</value>
+</property>
+
+<property>
+  <name>hbase.regionserver.keytab.file</name>
+  <value>/hd/conf/hadoop.keytab</value>
+</property>
+
+<property>
+  <name>hbase.master.kerberos.principal</name>
+  <value>root/_HOST@HADOOP.COM</value>
+</property>
+
+<property>
+<name>hbase.master.keytab.file</name>
+<value>/hd/conf/hadoop.keytab</value>
+</property>
+
+  <property>
+    <name>hbase.zookeeper.quorum</name>
+    <value>shd</value>
+  </property>
+
+  <property>
+    <name>hbase.cluster.distributed</name>
+    <value>true</value>
+  </property>
+
+  <property>
+    <name>hbase.zookeeper.property.authProvider.1</name>
+    <value>org.apache.zookeeper.server.auth.SASLAuthenticationProvider</value>
+  </property>
+
+  <property>
+    <name>hbase.zookeeper.property.kerberos.removeHostFromPrincipal</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>hbase.zookeeper.property.kerberos.removeRealmFromPrincipal</name>
+    <value>true</value>
   </property>
 
 </configuration>

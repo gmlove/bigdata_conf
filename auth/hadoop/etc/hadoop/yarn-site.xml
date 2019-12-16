@@ -22,7 +22,7 @@
 
     <property>
         <name>yarn.resourcemanager.hostname</name>
-        <value>hd01-7</value>
+        <value>__HOST__</value>
     </property>
     <property>
         <name>yarn.log-aggregation-enable</name>
@@ -51,7 +51,7 @@
 <!-- to fix issue: 'Failed while trying to construct...' (http://blog.51yip.com/hadoop/2066.html) -->
     <property>
          <name>yarn.log.server.url</name>
-         <value>http://hd01-7:19888/jobhistory/logs</value>
+         <value>http://__HOST__:19888/jobhistory/logs</value>
     </property>
 
 

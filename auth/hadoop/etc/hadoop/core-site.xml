@@ -19,7 +19,7 @@
 <configuration>
     <property>
         <name>fs.defaultFS</name>
-        <value>hdfs://hd01-7:9000</value>
+        <value>hdfs://__HOST__:9000</value>
     </property>
 
     <property>

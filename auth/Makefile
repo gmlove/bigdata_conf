@@ -75,9 +75,24 @@ build-docker:
 	test -f files/apache-zookeeper-3.5.5-bin.tar.gz || wget https://archive.apache.org/dist/zookeeper/zookeeper-3.5.5/apache-zookeeper-3.5.5-bin.tar.gz
 	test -f files/hbase-1.3.6-bin.tar.gz || wget http://mirrors.tuna.tsinghua.edu.cn/apache/hbase/hbase-1.3.6/hbase-1.3.6-bin.tar.gz
 	test -f files/spark-2.1.0-bin-hadoop2.7.tgz || wget https://archive.apache.org/dist/spark/spark-2.1.0/spark-2.1.0-bin-hadoop2.7.tgz
+	test -f files/livy-0.5.0-incubating-bin.zip || wget https://archive.apache.org/dist/incubator/livy/0.5.0-incubating/livy-0.5.0-incubating-bin.zip
 	docker build -t bigdata-auth . --build-arg build_host=${BUILD_HOST}
 
 
+CONTAINER_NAME=shd
+prepare-test-resources:
+	- rm -r resources
+	mkdir resources
+	docker cp ${CONTAINER_NAME}:/hd/hadoop/etc/hadoop/hdfs-site.xml ./resources/
+	docker cp ${CONTAINER_NAME}:/hd/hadoop/etc/hadoop/core-site.xml ./resources/
+	docker cp ${CONTAINER_NAME}:/hd/hadoop/etc/hadoop/yarn-site.xml ./resources/
+	docker cp ${CONTAINER_NAME}:/hd/hive/conf/hive-site.xml ./resources/
+	docker cp ${CONTAINER_NAME}:/hd/hbase/conf/hbase-site.xml ./resources/
+	docker cp ${CONTAINER_NAME}:/etc/krb5.conf ./resources/
+	docker cp ${CONTAINER_NAME}:/hd/conf/root.keytab ./resources/
+	cp ../test/src/test/resources/log4j.properties ./resources/
+	cp ../test/src/test/resources/jaas.conf ./resources/
+	cp ../test/src/test/resources/spark-pi.jar ./resources/
 
 
 

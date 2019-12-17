@@ -49,6 +49,8 @@ export AUTH_DEBUG_OPTS="-Dsun.security.krb5.debug=true -Dsun.security.spnego.deb
 export HBASE_OPTS="${HBASE_OPTS} -Djava.security.auth.login.config=$CLIENT_CONF $AUTH_DEBUG_OPTS"
 export HBASE_MANAGES_ZK=false
 export HBASE_ZOOKEEPER_OPTS="-Djava.security.auth.login.config=$HBASE_SERVER_CONF $AUTH_DEBUG_OPTS"
+export HBASE_MASTER_OPTS="-Djava.security.auth.login.config=$HBASE_SERVER_CONF $AUTH_DEBUG_OPTS"
+export HBASE_REGIONSERVER_OPTS="-Djava.security.auth.login.config=$HBASE_SERVER_CONF $AUTH_DEBUG_OPTS"
 
 # Configure PermSize. Only needed in JDK7. You can safely remove it for JDK8+
 export HBASE_MASTER_OPTS="$HBASE_MASTER_OPTS -XX:PermSize=128m -XX:MaxPermSize=128m -XX:ReservedCodeCacheSize=256m"

@@ -42,6 +42,7 @@
 # see http://wiki.apache.org/hadoop/PerformanceTuning
 export HBASE_OPTS="-XX:+UseConcMarkSweepGC"
 
+export HADOOP_HOME=/hd/hadoop
 export CLIENT_CONF="/hd/hbase/conf/jaas.conf"
 export HBASE_SERVER_CONF="/hd/hbase/conf/jaas.conf"
 export HBASE_OPTS="-XX:+UseConcMarkSweepGC"

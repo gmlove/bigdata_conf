@@ -19,7 +19,7 @@ kadmin.local xst -k /hd/conf/root.keytab root@HADOOP.COM
 # init/start mysql
 /usr/libexec/mariadb-prepare-db-dir mariadb.service
 /usr/bin/mysqld_safe --basedir=/usr 2>&1 1>hive/hive.metastore.mysql.log &
-myql -uroot -e "create user 'hive'@'localhost' identified by '123456'; grant all on *.* to hive@'localhost';"
+mysql -uroot -e "create user 'hive'@'localhost' identified by '123456'; grant all on *.* to hive@'localhost';"
 
 #---------- hbase
 # init zk

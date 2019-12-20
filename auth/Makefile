@@ -70,12 +70,12 @@ BUILD_HOST=shd
 build-docker:
 	mkdir -pv files
 	test -f files/hadoop-2.7.7.tar.gz || wget https://archive.apache.org/dist/hadoop/common/hadoop-2.7.7/hadoop-2.7.7.tar.gz -O files/hadoop-2.7.7.tar.gz
-	test -f files/apache-hive-1.2.2-bin.tar.gz || wget https://mirrors.tuna.tsinghua.edu.cn/apache/hive/hive-1.2.2/apache-hive-1.2.2-bin.tar.gz
-	test -f files/mysql-connector-java-5.1.48.jar || wget https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.48/mysql-connector-java-5.1.48.jar
-	test -f files/apache-zookeeper-3.5.5-bin.tar.gz || wget https://archive.apache.org/dist/zookeeper/zookeeper-3.5.5/apache-zookeeper-3.5.5-bin.tar.gz
-	test -f files/hbase-1.3.6-bin.tar.gz || wget http://mirrors.tuna.tsinghua.edu.cn/apache/hbase/hbase-1.3.6/hbase-1.3.6-bin.tar.gz
-	test -f files/spark-2.1.0-bin-hadoop2.7.tgz || wget https://archive.apache.org/dist/spark/spark-2.1.0/spark-2.1.0-bin-hadoop2.7.tgz
-	test -f files/livy-0.5.0-incubating-bin.zip || wget https://archive.apache.org/dist/incubator/livy/0.5.0-incubating/livy-0.5.0-incubating-bin.zip
+	test -f files/apache-hive-1.2.2-bin.tar.gz || wget https://mirrors.tuna.tsinghua.edu.cn/apache/hive/hive-1.2.2/apache-hive-1.2.2-bin.tar.gz -O files/apache-hive-1.2.2-bin.tar.gz
+	test -f files/mysql-connector-java-5.1.48.jar || wget https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.48/mysql-connector-java-5.1.48.jar -O files/mysql-connector-java-5.1.48.jar
+	test -f files/apache-zookeeper-3.5.5-bin.tar.gz || wget https://archive.apache.org/dist/zookeeper/zookeeper-3.5.5/apache-zookeeper-3.5.5-bin.tar.gz -O files/apache-zookeeper-3.5.5-bin.tar.gz
+	test -f files/hbase-1.3.6-bin.tar.gz || wget http://mirrors.tuna.tsinghua.edu.cn/apache/hbase/hbase-1.3.6/hbase-1.3.6-bin.tar.gz -O files/hbase-1.3.6-bin.tar.gz
+	test -f files/spark-2.1.0-bin-hadoop2.7.tgz || wget https://archive.apache.org/dist/spark/spark-2.1.0/spark-2.1.0-bin-hadoop2.7.tgz -O files/spark-2.1.0-bin-hadoop2.7.tgz
+	test -f files/livy-0.5.0-incubating-bin.zip || wget https://archive.apache.org/dist/incubator/livy/0.5.0-incubating/livy-0.5.0-incubating-bin.zip -O files/livy-0.5.0-incubating-bin.zip
 	docker build -t bigdata-auth . --build-arg build_host=${BUILD_HOST}
 
 

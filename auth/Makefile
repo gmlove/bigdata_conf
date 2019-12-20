@@ -23,7 +23,7 @@ test-spark:
 
 start-hive-metastore:
 	# /usr/bin/mysqld_safe --basedir=/usr 2>&1 1>hive/hive.metastore.mysql.log &
-	echo myql -uroot -e "create user 'hive'@'localhost' identified by '123456'; grant all on *.* to hive@'localhost';"
+	echo mysql -uroot -e "create user 'hive'@'localhost' identified by '123456'; grant all on *.* to hive@'localhost';"
 	cd hive && bin/hive --service metastore 2>&1 1>hive.metastore.service.log &
 
 start-hive:
